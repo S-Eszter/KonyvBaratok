@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="hu">
+
+  <head>
+    {% block title %}
+      {% if title %}
+        <title>KönyvBarátok - {{ title }}</title>
+      {% else %}
+        <title>KönyvBarátok</title>
+      {% endif %}
+    {% endblock %}
+    
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <!-- Add additional CSS in static file -->
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+
+    <!-- Optional JavaScript -->
+    <script defer src="{% static 'main.js' %}"></script>
+
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script defer src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+    <script defer src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+    
+  </head>
+
+  <body>
+    <header class="site-header">
+      <nav class="navbar navbar-expand-lg navbar-dark fixed-top bg-teal">
+          <a class="navbar-brand mr-0" href="{% url 'index' %}">KönyvBarátok</a>
+          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarToggle" aria-controls="navbarToggle" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse justify-content-center" id="navbarToggle">
+            <ul class="navbar-nav mx-auto">
+              <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Könyveim</a>
+                <div class="dropdown-menu" aria-labelledby="dropdown01">
+                  <a class="dropdown-item" href="{% url 'mybooks' %}">Összes könyvem</a>
+                  <a class="dropdown-item" href="{% url 'mybooks-recom' %}">Ajánlott könyveim</a>
+                  <a class="dropdown-item" href="{% url 'mybooks-loaned' %}">Kölcsönadott könyveim</a>
+                  <a class="dropdown-item" href="{% url 'mybooks-wished' %}">Kívánságlistám</a>
+                  <a class="dropdown-item" href="{% url 'book-create' %}">Új könyv létrehozása</a>
+                </div>
+              </li>
+              <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Kölcsönkért könyvek</a>
+                <div class="dropdown-menu" aria-labelledby="dropdown01">
+                  <a class="dropdown-item" href="{% url 'borrowed-books' %}">Nálam lévő könyvek</a>
+                  <a class="dropdown-item" href="{% url 'borrowed-books-fromnonusers' %}">Új könyv hozzáadása</a>
+                </div>
+              </li>
+              <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="dropdown02" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Ajánlott könyvek</a>
+                <div class="dropdown-menu" aria-labelledby="dropdown02">
+                  <a class="dropdown-item" href="{% url 'recom-books-byowner' %}">Barát szerint rendezve</a>
+                  <a class="dropdown-item" href="{% url 'recom-books-byauthor' %}">Szerző szerint rendezve</a>
+                  <a class="dropdown-item" href="{% url 'recom-books-bylang' %}">Nyelv szerint rendezve</a>
+                  <a class="dropdown-item" href="{% url 'recom-books-bygenre' %}">Műfaj szerint rendezve</a>
+                </div>
+              </li>
+              <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="dropdown03" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Kívánságlisták</a>
+                <div class="dropdown-menu" aria-labelledby="dropdown03">
+                  <a class="dropdown-item" href="{% url 'wished-books-byowner' %}">Barát szerint rendezve</a>
+                  <a class="dropdown-item" href="{% url 'wished-books-byauthor' %}">Szerző szerint rendezve</a>
+                </div>
+              </li>
+              <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="dropdown04" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Barátok</a>
+                <div class="dropdown-menu" aria-labelledby="dropdown04">
+                  <a class="dropdown-item" href="{% url 'myfriends' %}">Barátaim</a>
+                  <a class="dropdown-item" href="{% url 'request-friend' %}">Új barátok keresése</a>
+                  <a class="dropdown-item" href="{% url 'friend-notif' %}">Értesítések</a>
+                </div>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="{% url 'profile' %}">Profilom&nbsp;&nbsp;&nbsp;&nbsp;</a>
+              </li> 
+            </ul>
+            <!-- Navbar Right Side -->
+            <div class="navbar-nav">
+              <a class="nav-item nav-link" href="{% url 'logout' %}">Kijelentkezés</a>
+            </div>
+          </div>
+      </nav>
+    </header>
+
+    <main class="container" role="main">
+      <div class="row justify-content-center">
+        <div class="col-sm-8 ">
+
+          {% if messages %}
+            {% for message in messages %}
+              <div class="alert {{ message.tags }} alert-dismissible fade show" role="alert">
+                {{ message }}
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+            {% endfor %}
+          {% endif %}
+
+          {% block content %}
+          {% endblock %}
+
+          {% block pagination %}
+            {% if is_paginated %}
+                <div class="pagination justify-content-center">
+                    <span class="page-links">
+                        {% if page_obj.has_previous %}
+                            <a class="btn btn-outline-info mb-4 btn-sm" href="{{ request.path }}?page=1">|&laquo;</a>
+                            <a class="btn btn-outline-info mb-4 btn-sm" href="{{ request.path }}?page={{ page_obj.previous_page_number }}">&laquo;</a>
+                        {% endif %}
+                        {% for num in page_obj.paginator.page_range %}
+                            {% if page_obj.number == num %}
+                              <a class="btn btn-info mb-4 btn-sm" href="{{ request.path }}?page={{ num }}">{{ num }}</a>
+                            {% elif num > page_obj.number|add:'-2' and num < page_obj.number|add:'2' %}
+                              <a class="btn btn-outline-info mb-4 btn-sm" href="{{ request.path }}?page={{ num }}">{{ num }}</a>
+                            {% endif %}
+                        {% endfor %}
+                        {% if page_obj.has_next %}
+                            <a class="btn btn-outline-info mb-4 btn-sm" href="{{ request.path }}?page={{ page_obj.next_page_number }}">&raquo;</a>
+                            <a class="btn btn-outline-info mb-4 btn-sm" href="{{ request.path }}?page={{ page_obj.paginator.num_pages }}">&raquo;|</a>
+                        {% endif %}
+                    </span>
+                </div>
+            {% endif %}
+          {% endblock %}
+
+
+        </div>
+      </div>
+    </main>
+  </body>
+</html>

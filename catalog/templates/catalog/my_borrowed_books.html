@@ -1,0 +1,63 @@
+{% extends "base_generic.html" %}
+
+{% block content %}     
+
+<div class="card shadow p-3 mb-4 bg-white rounded">
+  <div class="card-body">
+      <h5 class="card-title">Felhasználótól kaptam</h5>
+      {% if borrowed_books %}
+        <ul class="list-group list-group-flush">
+        {% for book in borrowed_books %}
+          <li class="list-group-item px-1 py-2">
+            <p class="card-text"><strong>{{ book.last_name_author }}, {{ book.first_name_author }}:</strong> {{ book.title }}</p>
+            <div class='media'>
+              <img class ="rounded-circle friend-img" src="{{ book.owner.profile.image.url }}">
+              <div class='media-body'>
+                <p class="card-text text-muted">
+                  Tulajdonos: {{ book.owner }} <br>
+                  Kölcsönkaptam: {{ book.loan_date|date:"Y.m.d" }} <br>
+                  {% if book.comment %}
+                    Komment: {{ book.comment }}
+                  {% endif %}
+                </p>
+              </div>
+            </div>
+          </li>
+        {% endfor %}
+        </ul>
+      {% else %}
+        <p class="card-text">Nincs nálad kölcsönkért könyv.</p>
+      {% endif %}     
+  </div>
+</div>
+
+<div class="card shadow p-3 mb-4 bg-white rounded">
+  <div class="card-body">
+    <h5 class="card-title">Egyéb ismerőstől kaptam</h5>
+    {% if books_of_nonusers %}
+      <ul class="list-group list-group-flush">
+      {% for book in books_of_nonusers %}
+        <li class="list-group-item px-1 py-2">
+          <strong>{{ book.last_name_author }}, {{ book.first_name_author }}:</strong> {{ book.title }}
+          <p class="card-text text-muted ml-3">
+              Nyelv: {{ book.language }} <br>
+              Könyv tulajdonosa: {{ book.owner_nonuser }} <br>
+              Kölcsönkaptam: {{ book.loan_date|date:"Y.m.d" }} <br>
+              {% if book.comment %}
+                  Komment: {{ book.comment }}
+              {% endif %}
+          </p>
+          <div>
+              <a href="{% url 'book-of-nonuser-update' book.pk %}" class="btn btn-outline-info btn-sm">Módosítom</a>
+              <a href="{% url 'book-of-nonuser-delete' book.pk %}" class="btn btn-outline-secondary btn-sm float-right">Visszaadtam</a>
+          </div>   
+        </li>  
+      {% endfor %}
+      </ul>
+    {% else %}
+        <p class="card-text">Nincs nálad kölcsönkért könyv.</p>
+    {% endif %}    
+  </div>
+</div>
+
+{% endblock %}

@@ -1,0 +1,40 @@
+{% extends "base_generic.html" %}
+{% load static %}
+
+{% block content %}
+    {% if recom_books %}
+    {% regroup recom_books by owner as owner_list %}
+        {% for owner in owner_list %} 
+            <div class="card shadow p-3 mb-4 bg-white rounded">
+                <div class="card-body">
+                    <div class='media'>
+                        <img class ="rounded-circle friend-img" src="{{ owner.grouper.profile.image.url }}">
+                        <div class='media-body'>
+                            <h5 class='card-title mt-0'>{{ owner.grouper }} ajánlott könyvei</h2>
+                        </div>
+                    </div>
+                    <ul class="list-group list-group-flush">
+                        {% for book in owner.list %}
+                            <li class="list-group-item px-1 py-2">
+                                <strong>{{ book.last_name_author }}, {{ book.first_name_author }}</strong>: {{ book.title }}
+                                {% if book.loaned %}
+                                    <span class="card-text text-muted">(Kölcsönadva)</span><br>
+                                {% endif %}
+                                {% if book.comment %}
+                                    <span class="card-text text-muted ml-3">Komment: {{ book.comment }}</span>
+                                {% endif %}
+                            </li>    
+                        {% endfor %} 
+                    </ul>  
+                </div>
+            </div>
+        {% endfor %}
+    {% else %}
+        <div class="card shadow p-3 mb-4 bg-white rounded">
+            <div class="card-body">
+                <h5 class="card-title">{{ title }}</h5>
+                <p class="card-text">Nincsenek ajánlott könyvek.</p>
+            </div>
+        </div>
+    {% endif %}       
+{% endblock %}

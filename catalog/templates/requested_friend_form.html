@@ -1,0 +1,45 @@
+{% extends "base_generic.html" %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+
+<div class="card shadow p-3 mb-4 bg-white rounded">
+  <div class="card-body">
+    <h5 class="card-title">{{ title }}</h5>
+    <form action="" method="post">
+      {% csrf_token %}
+      {{ form|crispy }}
+      <div class="text-center">
+        <input class="btn btn-outline-info" type="submit" value="Barátnak jelölöm">
+      </div>
+    </form>
+  </div>
+</div>
+
+<div class="card shadow p-3 mb-4 bg-white rounded">
+  <div class="card-body">
+    <h5 class="card-title">Függésben lévő jelöléseid</h5>
+    {% if requested_friends%}
+      <ul class="list-group list-group-flush">
+        {% for friend in requested_friends %}
+          <li class="list-group-item px-1 py-2">
+            <div class='media'>
+              <img class ="rounded-circle friend-img" src="{{ friend.requested_friend.profile.image.url }}">
+              <div class='media-body'>
+                <p class="card-text text-muted">{{ friend.request_datetime|date:"Y.m.d" }}</p>
+                <p class='card-text'>
+                  {{ friend.requested_friend }} ({{ friend.requested_friend.last_name}} {{ friend.requested_friend.first_name}}) <br>
+                  <a class="btn btn-outline-secondary btn-sm float-right" href="{% url 'withdraw-request' friend.requested_friend.pk %}">Visszavonás</a>
+                </p>  
+              </div>
+            </div>
+          </li>
+        {% endfor %}
+      </ul>
+    {% else %}
+      <p class="card-text">Nincsenek függésben lévő barátságaid.</p>
+    {% endif %}
+  </div>
+</div>
+
+{% endblock %}

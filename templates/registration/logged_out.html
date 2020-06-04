@@ -1,0 +1,14 @@
+{% extends "base_login_logout_signup.html" %}
+
+{% block title %}
+    <title>KönyvBarátok - Kijelentkezés</title>
+{% endblock %}
+
+{% block content %}
+    <div class="text-center">
+        <p>Sikeresen kijelentkeztél.</p>
+    </div>
+    <div class="text-center">
+        <a class="btn btn-outline-info align-self-center" href="{% url 'login'%}">Újra bejelentkezem</a>
+    </div>
+{% endblock %}

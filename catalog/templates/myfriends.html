@@ -1,0 +1,40 @@
+{% extends "base_generic.html" %}
+
+{% block content %} 
+  
+<div class="card shadow p-3 mb-4 bg-white rounded">
+  <div class="card-body">
+    <h5 class="card-title">{{ title }}</h5>
+    {% if friends %}
+      <ul class="list-group list-group-flush">
+        {% for friend in friends %}
+          <li class="list-group-item px-1 py-2">
+            <div class='media'>
+              <img class ="rounded-circle friend-img" src="{{ friend.profile.image.url }}">
+              <div class='media-body'>
+                <p class="card-text"> 
+                  <strong>{{ friend }}</strong> <br>
+                  {% if friend.last_name and friend.first_name %}
+                    ({{ friend.last_name }} {{ friend.first_name }})
+                  {% endif %}
+                </p>
+              </div>
+            </div>
+            <div class='mt-2'>
+                <a class="btn btn-outline-info btn-sm mr-2" href="{% url 'friend-recom-books' friend.username %}">Ajánlott könyvei</a>
+                <a class="btn btn-outline-info btn-sm" href="{% url 'friend-wished-books' friend.username %}">Kívánságlistája</a>
+            </div>
+            <div class="mt-3"> 
+                <a href="{% url 'delete-friend' friend.pk %}" class="btn btn-outline-secondary btn-sm float-right">Barát törlése</a>
+            </div>
+            
+          </li>
+        {% endfor %}
+      </ul>
+    {% else %}
+      <p class="card-text">Még nincs barátod.</p>
+    {% endif %}        
+  </div>
+</div>
+     
+{% endblock %}

@@ -1,0 +1,32 @@
+{% extends "base_generic.html" %}
+{% load static %}
+
+{% block content %}
+
+<div class="card shadow p-3 mb-4 bg-white rounded">
+    <div class="card-body">
+        <h5 class="card-title">{{ title }}</h5>
+        {% if wished_books %}
+            <ul class="list-group list-group-flush">
+            {% for book in wished_books %}
+                <li class="list-group-item px-1 py-2">
+                    <p class="card-text">
+                        <strong>{{ book.last_name_author }}, {{ book.first_name_author }}:</strong> {{ book.title }} <span class="text-muted">({{ book.language }})</span><br>
+                        {% if book.comment %}
+                            <span class="card-text text-muted ml-3">Komment: {{ book.comment }}</span>
+                        {% endif %}
+                    </p>
+                    <p class="card-text float-right">
+                        {{ book.owner }}
+                        <img class ="rounded-circle friend-img ml-2" src="{{ book.owner.profile.image.url }}">
+                    </p>  
+                </li>
+            {% endfor %}
+            </ul>
+        {% else %}
+            <p class="card-text">Nem szerepel könyv a kívánságlistákon.</p>
+        {% endif %}     
+    </div>
+</div>
+      
+{% endblock %}

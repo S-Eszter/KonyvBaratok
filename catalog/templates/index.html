@@ -1,0 +1,71 @@
+{% extends "base_generic.html" %}
+
+{% block content %}
+
+<div class="card shadow p-3 mb-4 bg-white rounded">
+  <div class="card-body">
+    <h5 class="card-title">Könyvek</h5>
+    <p class="card-text">
+      Könyveid száma:
+      <a href="{% url 'mybooks' %}" class="badge badge-info">{{ num_books }}</a>
+    </p>
+    <p class="card-text">
+      Kölcsönadott könyveid száma:
+      <a href="{% url 'mybooks-loaned' %}" class="badge badge-info">{{ loaned_books }}</a>
+    </p>
+    <p class="card-text">
+      Kölcsönkért könyvek száma:
+      <a href="{% url 'borrowed-books' %}" class="badge badge-info">{{ borrowed_books }}</a>
+    </p>
+    <span class='info'>&nbsp;i</span>
+    <small class="card-text text-muted">A számokra kattintva gyorsan a megfelelől oldalakra navigálhatsz.</small>
+  </div>
+</div>
+
+<div class="card shadow p-3 mb-4 bg-white rounded">
+  <div class="card-body">
+    <h5 class="card-title">Barátok</h5>
+    <p class="card-text">
+      Barátaid száma:
+      <a href="{% url 'myfriends' %}" class="badge badge-info">{{ num_friends }}</a>
+    </p>
+    <p class="card-text">
+      Bejelölt ismerősök száma:
+      <a href="{% url 'request-friend' %}" class="badge badge-info">{{ num_req_friend }}</a>
+    </p>
+    <p class="card-text">
+      Visszaigazolásodra vár (fő):
+      <a href="{% url 'friend-notif' %}" class="badge badge-info">{{ num_requests }}</a>
+    </p>  
+  </div>
+</div>
+
+<div class="card shadow p-3 mb-4 bg-white rounded">
+  <div class="card-body">
+    <h5 class="card-title">KönyvBarátok</h5>
+    <h6 class="card-subtitle text-muted mb-2">Amit az oldal használatáról tudni érdemes</h6>
+    <ul id="app-info" class="list-group list-group-flush">
+        <li class="list-group-item px-1 py-2 text-justify">
+            Az app segítségével listát tudsz készíteni a könyveidről, nyomon tudod követni őket 
+            (ha például kölcsönadtad valamelyiket), és azt is számon tudod tartani, hogy milyen könyveket kaptál 
+            kölcsön másoktól.
+        </li>
+        <li class="list-group-item px-1 py-2 text-justify">
+            Ha egy másik felhasználóval barátok vagytok, akkor kölcsönösen látjátok egymás ajánlott könyveit és kívánságlistáját,
+            de lehet az oldalt barátok nélkül is használni.
+        </li>
+        <li class="list-group-item px-1 py-2 text-justify">
+            Ha egy könyvet ajánlottnak jelölsz, az azt jelenti, hogy a könyvet szívesen kölcsön is adod a barátaidnak.
+            Ha a kívánságlistádon szerepel, akkor szeretnéd kölcsön kapni, vagy akár szülinapi ajándékként is örülnél neki. 
+        </li>
+
+        <li class="list-group-item px-1 py-2 text-justify">
+            Mindenki a saját könyveiért felel, azaz ha kölcsönadod valakinek, akkor Neked kell a könyv adatait módosítanod,
+            és amikor visszakapod, akkor is Te vagy ezért a felelős.
+        </li>
+    </ul>
+ 
+  </div>
+</div>
+
+{% endblock %}

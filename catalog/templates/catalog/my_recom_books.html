@@ -1,0 +1,27 @@
+{% extends "base_generic.html" %}
+
+{% block content %}
+
+<div class="card shadow p-3 mb-4 bg-white rounded">
+  <div class="card-body">
+      <h5 class="card-title">{{ title }}</h5>
+      {% if my_recom_books %}
+        <ul class="list-group list-group-flush">
+        {% for book in my_recom_books %}
+          <li class="list-group-item px-1 py-2">
+            <p class="card-text">
+              <strong>{{ book.last_name_author }}, {{ book.first_name_author }}:</strong> {{ book.title }} <br>
+              <span class="float-right">
+                <a href="{% url 'book-update' book.pk %}" class="btn btn-outline-info btn-sm">Módosítom</a>
+              </span>
+            </p>
+          </li>
+        {% endfor %}
+        </ul>
+      {% else %}
+        <p class="card-text">Nincs ajánlott könyved.</p>
+      {% endif %}     
+  </div>
+</div>
+
+{% endblock %}

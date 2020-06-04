@@ -1,0 +1,58 @@
+{% extends "base_generic.html" %}
+
+{% block content %}
+
+<form action="" method="POST">
+  {% csrf_token %}
+
+  <div class="card shadow p-3 mb-4 bg-white rounded">
+    <div class="card-body">
+      <h5 class="card-title">Barátod szeretne lenni</h5>
+      {% if requests%}
+        <ul class="list-group list-group-flush">
+          {% for request in requests %}
+            <li class="list-group-item px-1 py-2">
+              <div class='media'>
+                <img class ="rounded-circle friend-img" src="{{ request.user.profile.image.url }}">
+                <div class='media-body'>
+                  <p class="card-text text-muted">{{ request.request_datetime|date:"Y.m.d" }}</p>
+                  <p class='card-text'>{{ request.user }} ({{ request.user.last_name }} {{ request.user.first_name}})</p>
+                  <button class="btn btn-outline-info mt-2 btn-sm" type="submit" name="user_to_handle" value='c{{ request.user }}'>Visszajelölöm</button>
+                  <button class="btn btn-outline-secondary mt-2 btn-sm" type="submit" name="user_to_handle" value='r{{ request.user }}'>Visszautasítom</button>
+                </div>
+              </div> 
+            </li>
+          {% endfor %}
+        </ul>
+      {% else %}
+        <p class="card-text">Nem jelöltek be barátnak.</p>
+      {% endif %}
+    </div>
+  </div>
+
+  <div class="card shadow p-3 mb-4 bg-white rounded">
+    <div class="card-body">
+      <h5 class="card-title">Viszautasított jelöléseid</h5>
+      {% if rejected_requests%}
+        <ul class="list-group list-group-flush">
+          {% for rej_request in rejected_requests %}
+            <li class="list-group-item px-1 py-2">
+              <div class='media'>
+                <img class ="rounded-circle friend-img" src="{{ rej_request.rejecter.profile.image.url }}">
+                <div class='media-body'>
+                  <p class="card-text text-muted">{{ rej_request.rejection_datetime|date:"Y.m.d" }}</p>
+                  <p class='card-text'>{{ rej_request.rejecter }} ({{ rej_request.rejecter.last_name}} {{ rej_request.rejecter.first_name}})</p>
+                  <button class="btn btn-outline-secondary btn-sm" type="submit" name="user_to_handle" value='d{{ rej_request.rejecter }}'>Értesítés törlése</button>
+                </div>
+              </div>
+            </li>
+          {% endfor %}
+        </ul>
+      {% else %}
+        <p class="card-text">Nincs új értesítésed.</p>
+      {% endif %}
+    </div>
+  </div>
+</form>
+  
+{% endblock %}

@@ -1,0 +1,16 @@
+{% extends "base_generic.html" %}
+
+{% block content %}
+
+<div class="card shadow p-3 mb-4 bg-white rounded">
+  <div class="card-body">
+      <p class="card-text">Biztos, hogy törölni akarod ezt a könyvet: <strong>{{ book }}</strong>?</p>
+      <form action="" method="POST">
+          {% csrf_token %}
+          <input type="submit" class="btn btn-outline-secondary" value="Könyv törlése">
+          <a class="btn btn-outline-info float-right" href="{% url 'book-detail' book.pk %}">Mégsem</a>
+      </form>
+  </div>
+</div>
+
+{% endblock %}

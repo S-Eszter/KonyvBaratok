@@ -1,0 +1,18 @@
+{% extends "base_generic.html" %}
+
+{% block content %}
+
+<div class="card shadow p-3 mb-4 bg-white rounded">
+    <div class="card-body">
+        <p class="card-text">Biztos, hogy törölni akarod ezt a barátodat: {{ deleted_user }}?</p>
+        <form action="#" method="POST">
+            {% csrf_token %}
+            <button class="btn btn-outline-secondary" type="submit" name="user_to_handle" value='{{ deleted_user }}'>Barát törlése</button>
+            <a class="btn btn-outline-info ml-3" href="{% url 'myfriends' %}">Mégsem</a>
+        </form> 
+    </div>
+</div>
+
+{% endblock %}
+
+

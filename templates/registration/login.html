@@ -1,0 +1,39 @@
+{% extends "base_login_logout_signup.html" %}
+
+{% block title%}
+    <title>KönyvBarátok - Belépés</title>
+{% endblock %}
+
+{% block content %}
+    {% load crispy_forms_tags %}
+    <!--
+    <div id="admin-message" class="text-center">
+        <small>Rendszerleállás lesz június 15.-én 21-24 óra között.</small>
+    </div>
+    -->
+    <form method="post" action="{% url 'login' %}">
+        {% csrf_token %}
+        <fieldset class="form-group">
+            <legend class="border-bottom mb-4">Belépés</legend>
+            {{ form|crispy }}
+        </fieldset>
+        <div class="text-center mb-4">
+            <button class="btn btn-outline-info" type="submit">Belépés</button>
+            <input type="hidden" name="next" value="{{ next }}"/>
+        </div>
+    </form>
+    <div class="text-center">
+        <small class='text-muted'>Még új vagy a KönyvBarátokon?<a href="{% url 'signup' %}"> Regisztrálj!</a></small><br>
+        <small class='text-muted'>Nem sikerült bejelentkezned? Jelezd az adminnak.</small>
+    </div>
+    <div id="site-info" class="text-center mt-3">
+        <small>
+            <strong>Fontos információ!</strong>
+            Ez egy hobby project, ami alapvetően a tanulás kedvéért készült.
+            Kérdéses, hogy meddig fog ez az app működni, ennek tudatában használd. <br>
+            Admin elérhetősége: adm.konyvbaratok@gmail.com
+        </small>  
+    </div>
+    
+
+{% endblock %}

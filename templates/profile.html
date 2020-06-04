@@ -1,0 +1,35 @@
+{% extends "base_generic.html" %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+<div class="card shadow p-3 mb-4 bg-white rounded">
+    <div class="card-body">
+
+        <div class='media'>
+            <img class='rounded-circle profile-img' src='{{ user.profile.image.url }}'>
+            <div class='media-body'>
+                <h2 class='mt-0'>{{ user.username }}</h2>
+                <p class='text-secondary'>{{ user.last_name }} {{ user.first_name }}</p>
+            </div>
+        </div>
+        <form method="POST" enctype="multipart/form-data">
+            {% csrf_token %}
+            <fieldset class="form-group">
+                <legend class="border-bottom mb-4">Adatok módosítása</legend>
+                {{ u_form|crispy }}
+                {{ p_form|crispy }}
+            </fieldset>
+            <div class="form-group text-center">
+                <button class="btn btn-outline-info" type="submit">Módosítom</button>
+            </div>
+        </form>
+        <fieldset class="form-group mt-5">
+            <legend class="border-bottom mb-4">Egyéb műveletek</legend>
+                <a class="btn btn-outline-info" href="{% url 'change-password' %}">Jelszó módosítása</a>
+                <br>
+                <a class="btn btn-outline-secondary mt-3" href="{% url 'delete-profile' %}">Profil törlése</a>
+        </fieldset>
+        
+    </div>
+</div>
+{% endblock %}

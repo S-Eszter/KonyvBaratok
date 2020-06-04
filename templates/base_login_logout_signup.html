@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="hu-hu">
+    <head>
+        {% block title %}
+        {% endblock %}
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+        <!-- Add additional CSS in static file -->
+        {% load static %}
+        <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+    </head>
+    <body>
+        <div class="container">
+            <div class="row justify-content-center my-4">
+                <div class="col-sm-5">
+                    <div class="card shadow p-3 mb-4 bg-white rounded">
+                        <div class="card-body">
+                            <h3 class='text-center mb-3'>KönyvBarátok</h3>
+                            {% block content %}
+                            {% endblock %}
+                        </div>
+                    </div>    
+                </div>
+            </div>
+        </div>
+    </body>
+</html>
+

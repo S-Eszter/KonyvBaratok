@@ -1,0 +1,40 @@
+{% extends "base_generic.html" %}
+
+{% block content %}
+
+<div class="card shadow p-3 mb-4 bg-white rounded">
+    <div class="card-body">
+      <h5 class="card-title">{{ book.last_name_author }}, {{ book.first_name_author }}: {{ book.title }}</h5>
+      <p class="card-text">Nyelv: {{ book.language }}</p>
+      <p class="card-text">Műfaj: {{ book.genre }}</p>
+      {% if book.recommended %}
+        <p class="card-text">Ajánlom: Igen </p>
+      {% else %}
+        <p class="card-text">Ajánlom: Nem </p>
+      {% endif %}
+      {% if book.wished %}
+        <p class="card-text">Kívánságlistámon: Igen </p>
+      {% else %}
+        <p class="card-text">Kívánságlistámon: Nem </p>
+      {% endif %}
+      {% if book.loaned %}
+        {% if book.borrower %}
+          <p class="card-text">Kölcsönadtam: {{ book.borrower }} ({{ book.loan_date|date:"Y.m.d" }})</p>
+        {% else %}
+          <p class="card-text">Kölcsönadtam: {{ book.borrower_nonuser }} ({{ book.loan_date|date:"Y.m.d" }})</p>
+        {% endif %}
+      {% else %}
+          <p class="card-text">Kölcsönadtam: Nem </p>
+      {% endif %}
+      {% if book.comment %}
+        <p class="card-text">Komment: {{ book.comment}} </p>
+      {% else %}
+        <p class="card-text">Komment: - </p>
+      {% endif %} 
+      <br>   
+      <a href="{% url 'book-update' book.pk %}" class="btn btn-outline-info mr-3">Módosítom</a>
+      <a href="{% url 'book-delete' book.pk %}" class="btn btn-outline-secondary float-right">Törlöm</a>
+    </div>
+</div>
+
+{% endblock %}

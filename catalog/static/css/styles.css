@@ -1,0 +1,107 @@
+
+#admin-message{
+    border-width: 1px;
+    border-style: solid;
+    border-color: red;
+    border-radius: 5px;
+    color: red;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    padding: 3px;
+}
+
+#site-info{
+    border-width: 1px;
+    border-style: solid;
+    border-color: teal;
+    border-radius: 5px;
+    color: teal;
+    margin-top: 10px;
+    padding: 3px;
+}
+
+
+
+.nav-img{
+    height: 30px;
+    width: 30px;
+    object-fit: cover;
+}
+
+.friend-img{
+    height: 65px;
+    width: 65px;
+    margin-right: 16px;
+    object-fit: cover;
+}
+
+.profile-img{
+    height: 125px;
+    width: 125px;
+    margin-right: 20px;
+    margin-bottom: 16px;
+    object-fit: cover;
+}
+
+.bg-teal{
+    background-color: teal;
+}
+
+.card-title{
+    font-size: 1.4rem;
+    font-weight: 600;
+}
+
+.text-grey{
+    color: rgb(207, 207, 207) !important;
+}
+
+main{
+    margin-top: 70px;
+    margin-bottom: 20px;
+}
+
+.card-text{
+    margin-bottom: 0.5rem;
+}
+
+.card-body{
+    padding: 0.5rem;
+}
+
+h4{
+    margin-bottom: 1rem;
+}
+
+.card-title{
+    color: teal;
+}
+
+legend{
+    color: teal;
+    font-size: 1.4rem;
+    font-weight: 600;
+}
+
+h3{
+    font-size: 2rem;
+    font-weight: 600;
+    color: teal;
+}
+
+.form-group[disabled]{
+    color: grey;
+}
+
+ul{
+    list-style: none;
+    padding-left: 0px;
+}
+
+.info{
+    color:#17a2b8;
+    vertical-align: text-top;
+    font-weight: 800;
+    font-style: italic;
+    font-size: 0.7em; 
+}
